@@ -11,9 +11,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +38,8 @@ fun MahjongLayout(modifier: Modifier = Modifier) {
 @Composable
 fun PlayerCard(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
+        modifier = modifier.padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "Player 1"
