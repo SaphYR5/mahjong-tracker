@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,14 +55,21 @@ fun MahjongLayout(modifier: Modifier = Modifier) {
     var playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
     var playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
 
-    var playerExpanded by remember { mutableStateOf(true) }
+    var playerExpanded by remember { mutableStateOf(false) }
+    var playerExpandedIndex by remember { mutableIntStateOf(0) }
+    val maxNameLength = 12;
 
-    PlayerCards(playerNames = playerNames, playerScores = playerScores, modifier = modifier)
+    PlayerCards(
+        playerNames = playerNames,
+        playerScores = playerScores,
+        onCardClicked = { index -> playerExpandedIndex = index; playerExpanded = true },
+        modifier = modifier
+    )
 
     if (playerExpanded) {
         EditPlayerDetails(
-            playerNames[0],
-            onNameChanged = { playerNames[0] = it },
+            playerNames[playerExpandedIndex],
+            onNameChanged = { if (it.length < maxNameLength) playerNames[playerExpandedIndex] = it },
             onDismissRequest = { playerExpanded = false }
         )
     }
@@ -83,6 +91,7 @@ fun EditPlayerDetails(
                 modifier = Modifier
                     .size(240.dp)
             ) {
+                Spacer(modifier = Modifier.size(24.dp))
                 Text(
                     text = "Edit player name",
                     textAlign = TextAlign.Center,
@@ -90,7 +99,12 @@ fun EditPlayerDetails(
                 )
                 TextField(
                     value = playerName,
+                    singleLine = true,
                     onValueChange = onNameChanged,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Done
+                    ),
                     modifier = Modifier.padding(8.dp)
                 )
             }
@@ -102,6 +116,7 @@ fun EditPlayerDetails(
 fun PlayerCards(
     playerNames: List<String>,
     playerScores: List<Int>,
+    onCardClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -111,19 +126,35 @@ fun PlayerCards(
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            PlayerCard(name = playerNames[0], score = playerScores[0])
+            PlayerCard(
+                name = playerNames[0],
+                score = playerScores[0],
+                onCardClicked = { onCardClicked(0) }
+            )
         }
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            PlayerCard(name = playerNames[1], score = playerScores[1])
+            PlayerCard(
+                name = playerNames[1],
+                score = playerScores[1],
+                onCardClicked = { onCardClicked(1) }
+            )
             Spacer(modifier = Modifier.size(128.dp))
-            PlayerCard(name = playerNames[2], score = playerScores[2])
+            PlayerCard(
+                name = playerNames[2],
+                score = playerScores[2],
+                onCardClicked = { onCardClicked(2) }
+            )
         }
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            PlayerCard(name = playerNames[3], score = playerScores[3])
+            PlayerCard(
+                name = playerNames[3],
+                score = playerScores[3],
+                onCardClicked = { onCardClicked(3) }
+            )
         }
     }
 }
@@ -132,9 +163,11 @@ fun PlayerCards(
 fun PlayerCard(
     name: String,
     score: Int,
+    onCardClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
+        onClick = onCardClicked,
         modifier = modifier
     ) {
         Column(
