@@ -39,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.core.view.WindowCompat
 import android.view.Window
+import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
 import androidx.core.view.WindowCompat.setDecorFitsSystemWindows
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -126,6 +128,15 @@ fun EditPlayerDetails(
                     ),
                     modifier = Modifier.padding(8.dp)
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                Button(
+                    onClick = onDismissRequest,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.End)
+                ) {
+                    Text(text = "Done")
+                }
             }
         }
     }
