@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -28,8 +31,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,6 +54,56 @@ fun MahjongLayout(modifier: Modifier = Modifier) {
     var playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
     var playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
 
+    var playerExpanded by remember { mutableStateOf(true) }
+
+    PlayerCards(playerNames = playerNames, playerScores = playerScores, modifier = modifier)
+
+    if (playerExpanded) {
+        EditPlayerDetails(
+            playerNames[0],
+            onNameChanged = { playerNames[0] = it },
+            onDismissRequest = { playerExpanded = false }
+        )
+    }
+}
+
+@Composable
+fun EditPlayerDetails(
+    playerName: String,
+    onDismissRequest: () -> Unit,
+    onNameChanged: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Dialog(onDismissRequest = onDismissRequest) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier.padding(16.dp),
+        ) {
+            Card(
+                modifier = Modifier
+                    .size(240.dp)
+            ) {
+                Text(
+                    text = "Edit player name",
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(8.dp).fillMaxWidth()
+                )
+                TextField(
+                    value = playerName,
+                    onValueChange = onNameChanged,
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun PlayerCards(
+    playerNames: List<String>,
+    playerScores: List<Int>,
+    modifier: Modifier = Modifier
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
@@ -79,7 +134,9 @@ fun PlayerCard(
     score: Int,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier) {
+    Card(
+        modifier = modifier
+    ) {
         Column(
             modifier = Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
