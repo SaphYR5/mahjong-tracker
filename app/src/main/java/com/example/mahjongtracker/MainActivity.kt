@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -45,6 +46,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MahjongLayout(modifier: Modifier = Modifier) {
+    var playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
+    var playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
+
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
@@ -52,27 +56,29 @@ fun MahjongLayout(modifier: Modifier = Modifier) {
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            PlayerCard()
+            PlayerCard(name = playerNames[0], score = playerScores[0])
         }
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            PlayerCard()
+            PlayerCard(name = playerNames[1], score = playerScores[1])
             Spacer(modifier = Modifier.size(128.dp))
-            PlayerCard()
+            PlayerCard(name = playerNames[2], score = playerScores[2])
         }
         Row(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            PlayerCard()
+            PlayerCard(name = playerNames[3], score = playerScores[3])
         }
     }
 }
 
 @Composable
-fun PlayerCard(modifier: Modifier = Modifier) {
-    var name by remember { mutableStateOf("Player 1") }
-
+fun PlayerCard(
+    name: String,
+    score: Int,
+    modifier: Modifier = Modifier
+) {
     Card(modifier = modifier) {
         Column(
             modifier = Modifier.padding(8.dp),
