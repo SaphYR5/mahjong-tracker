@@ -41,6 +41,7 @@ import androidx.core.view.WindowCompat
 import android.view.Window
 import androidx.compose.material3.Button
 import androidx.compose.material3.IconButton
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.core.view.WindowCompat.setDecorFitsSystemWindows
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -124,7 +125,8 @@ fun EditPlayerDetails(
                     onValueChange = onNameChanged,
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Done
+                        imeAction = ImeAction.Done,
+                        capitalization = KeyboardCapitalization.Words
                     ),
                     modifier = Modifier.padding(8.dp)
                 )
