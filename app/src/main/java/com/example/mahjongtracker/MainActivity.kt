@@ -4,10 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,27 +45,50 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MahjongLayout(modifier: Modifier = Modifier) {
-    PlayerCard()
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
+    ) {
+        Row(
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            PlayerCard()
+        }
+        Row(
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            PlayerCard()
+            Spacer(modifier = Modifier.size(128.dp))
+            PlayerCard()
+        }
+        Row(
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            PlayerCard()
+        }
+    }
 }
 
 @Composable
 fun PlayerCard(modifier: Modifier = Modifier) {
     var name by remember { mutableStateOf("Player 1") }
 
-    Column(
-        modifier = modifier.padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = name
-        )
-        Icon(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = null
-        )
-        Text(
-            text = "0"
-        )
+    Card(modifier = modifier) {
+        Column(
+            modifier = Modifier.padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = name
+            )
+            Icon(
+                painter = painterResource(R.drawable.ic_launcher_foreground),
+                contentDescription = null
+            )
+            Text(
+                text = "0"
+            )
+        }
     }
 }
 
@@ -68,6 +96,10 @@ fun PlayerCard(modifier: Modifier = Modifier) {
 @Composable
 fun MahjongPreview() {
     MahjongTrackerTheme {
-        MahjongLayout()
+        MahjongLayout(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        )
     }
 }
