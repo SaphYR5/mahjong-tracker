@@ -1,6 +1,7 @@
 package com.example.mahjongtracker
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -36,16 +37,34 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.core.view.WindowCompat
+import android.view.Window
+import androidx.core.view.WindowCompat.setDecorFitsSystemWindows
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             MahjongTrackerTheme {
                 MahjongPreview()
             }
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        window.decorView.apply {
+            // Hide both the navigation bar and the status bar.
+            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+            // a general rule, you should design your app to hide the status bar whenever you
+            // hide the navigation bar.
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
     }
 }
@@ -140,7 +159,7 @@ fun PlayerCards(
                 score = playerScores[1],
                 onCardClicked = { onCardClicked(1) }
             )
-            Spacer(modifier = Modifier.size(128.dp))
+            Spacer(modifier = Modifier.weight(1f))
             PlayerCard(
                 name = playerNames[2],
                 score = playerScores[2],
@@ -182,7 +201,7 @@ fun PlayerCard(
                 contentDescription = null
             )
             Text(
-                text = "0"
+                text = score.toString()
             )
         }
     }
