@@ -18,17 +18,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.mahjongtracker.PlayerDetailsDialog
-import com.example.mahjongtracker.PlayerWinDialog
 import com.example.mahjongtracker.R
+import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
 class TrackGameScreen {
 
 }
 
 @Composable
-fun MahjongLayout(modifier: Modifier = Modifier) {
+fun TrackGameLayout(modifier: Modifier = Modifier) {
     var playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
     var playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
 
@@ -113,5 +113,13 @@ fun PlayerCard(
                 text = score.toString()
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun TrackGameScreenPreview() {
+    MahjongTrackerTheme {
+        TrackGameScreen()
     }
 }
