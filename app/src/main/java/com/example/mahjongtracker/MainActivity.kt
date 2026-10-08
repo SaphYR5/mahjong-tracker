@@ -72,41 +72,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun MahjongLayout(modifier: Modifier = Modifier) {
-    var playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
-    var playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
-
-    var playerExpanded by remember { mutableStateOf(false) }
-    var playerExpandedIndex by remember { mutableIntStateOf(0) }
-    val maxNameLength = 12;
-
-    var winExpanded by remember { mutableStateOf(false) }
-    var winner by remember { mutableIntStateOf(0) }
-
-    PlayerCards(
-        playerNames = playerNames,
-        playerScores = playerScores,
-        onCardClicked = { index -> playerExpandedIndex = index; playerExpanded = true },
-        modifier = modifier
-    )
-
-    if (playerExpanded) {
-        PlayerDetailsDialog(
-            playerNames[playerExpandedIndex],
-            onNameChanged = { if (it.length < maxNameLength) playerNames[playerExpandedIndex] = it },
-            onDismissRequest = { playerExpanded = false }
-        )
-    }
-
-    PlayerWinDialog(
-        playerNames = playerNames,
-        winner = winner,
-        onWinnerSelected = { winner = playerNames.indexOf(it) },
-        onDismissRequest = { winExpanded = false }
-    )
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerWinDialog(
@@ -205,82 +170,6 @@ fun PlayerDetailsDialog(
                     Text(text = "Done")
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun PlayerCards(
-    playerNames: List<String>,
-    playerScores: List<Int>,
-    onCardClicked: (Int) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
-    ) {
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        ) {
-            PlayerCard(
-                name = playerNames[0],
-                score = playerScores[0],
-                onCardClicked = { onCardClicked(0) }
-            )
-        }
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        ) {
-            PlayerCard(
-                name = playerNames[1],
-                score = playerScores[1],
-                onCardClicked = { onCardClicked(1) }
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            PlayerCard(
-                name = playerNames[2],
-                score = playerScores[2],
-                onCardClicked = { onCardClicked(2) }
-            )
-        }
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        ) {
-            PlayerCard(
-                name = playerNames[3],
-                score = playerScores[3],
-                onCardClicked = { onCardClicked(3) }
-            )
-        }
-    }
-}
-
-@Composable
-fun PlayerCard(
-    name: String,
-    score: Int,
-    onCardClicked: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        onClick = onCardClicked,
-        modifier = modifier
-    ) {
-        Column(
-            modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = name
-            )
-            Icon(
-                painter = painterResource(R.drawable.ic_launcher_foreground),
-                contentDescription = null
-            )
-            Text(
-                text = score.toString()
-            )
         }
     }
 }
