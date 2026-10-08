@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mahjongtracker.R
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
@@ -33,19 +36,26 @@ fun TrackGameLayout(modifier: Modifier = Modifier) {
     val playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
     val playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
 
-    PlayerCards(
-        playerNames = playerNames,
-        playerScores = playerScores,
-        onCardClicked = { },
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-    )
+    ) {
+        PlayerCards(
+            playerNames = playerNames,
+            playerScores = playerScores
+        )
+        Spacer(Modifier.size(100.dp))
+        RecordButton()
+    }
+
+
 }
 
 @Composable
 fun PlayerCards(
     playerNames: List<String>,
     playerScores: List<Int>,
-    onCardClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -58,7 +68,6 @@ fun PlayerCards(
             PlayerCard(
                 name = playerNames[0],
                 score = playerScores[0],
-                onCardClicked = { onCardClicked(0) }
             )
         }
         Row(
@@ -67,13 +76,11 @@ fun PlayerCards(
             PlayerCard(
                 name = playerNames[1],
                 score = playerScores[1],
-                onCardClicked = { onCardClicked(1) }
             )
             Spacer(modifier = Modifier.weight(1f))
             PlayerCard(
                 name = playerNames[2],
                 score = playerScores[2],
-                onCardClicked = { onCardClicked(2) }
             )
         }
         Row(
@@ -82,7 +89,6 @@ fun PlayerCards(
             PlayerCard(
                 name = playerNames[3],
                 score = playerScores[3],
-                onCardClicked = { onCardClicked(3) }
             )
         }
     }
@@ -92,11 +98,9 @@ fun PlayerCards(
 fun PlayerCard(
     name: String,
     score: Int,
-    onCardClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = onCardClicked,
         modifier = modifier
     ) {
         Column(
@@ -117,12 +121,24 @@ fun PlayerCard(
     }
 }
 
+@Composable
+fun RecordButton(
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = {},
+        content = { Text("Record Game", fontSize = 20.sp) },
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun TrackGameScreenPreview() {
     MahjongTrackerTheme {
         TrackGameLayout(
-            modifier = Modifier.fillMaxSize().padding(8.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
         )
     }
 }
