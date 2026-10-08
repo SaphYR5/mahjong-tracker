@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,6 +42,13 @@ fun TrackGameLayout(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
+        Row(
+            modifier = Modifier.padding(8.dp)
+        ) {
+            HomeButton()
+            Spacer(modifier = Modifier.weight(1f))
+            SettingsButton()
+        }
         PlayerCards(
             playerNames = playerNames,
             playerScores = playerScores
@@ -48,8 +56,6 @@ fun TrackGameLayout(modifier: Modifier = Modifier) {
         Spacer(Modifier.size(100.dp))
         RecordButton()
     }
-
-
 }
 
 @Composable
@@ -128,6 +134,26 @@ fun RecordButton(
     Button(
         onClick = {},
         content = { Text("Record Game", fontSize = 20.sp) },
+    )
+}
+
+@Composable
+fun SettingsButton(
+    modifier: Modifier = Modifier
+) {
+    IconButton(
+        onClick = {},
+        content = {}
+    )
+}
+
+@Composable
+fun HomeButton(
+    modifier: Modifier = Modifier
+) {
+    IconButton(
+        onClick = {},
+        content = {}
     )
 }
 
