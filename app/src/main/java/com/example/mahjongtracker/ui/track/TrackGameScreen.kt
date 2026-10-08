@@ -164,7 +164,7 @@ fun TrackGameScreenPreview() {
         TrackGameLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp)
+                .padding(start = 8.dp, end = 8.dp, top = 20.dp, bottom = 0.dp)
         )
     }
 }
