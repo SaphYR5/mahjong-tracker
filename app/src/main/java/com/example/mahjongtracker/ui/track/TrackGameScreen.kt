@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -29,8 +30,8 @@ class TrackGameScreen {
 
 @Composable
 fun TrackGameLayout(modifier: Modifier = Modifier) {
-    var playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
-    var playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
+    val playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
+    val playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
 
     PlayerCards(
         playerNames = playerNames,
@@ -116,10 +117,12 @@ fun PlayerCard(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun TrackGameScreenPreview() {
     MahjongTrackerTheme {
-        TrackGameScreen()
+        TrackGameLayout(
+            modifier = Modifier.fillMaxSize().padding(8.dp)
+        )
     }
 }
