@@ -2,7 +2,10 @@ package com.example.mahjongtracker.ui.track
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,14 +31,31 @@ class RecordWinScreen {
 @Composable
 fun RecordWinLayout(modifier: Modifier = Modifier) {
     val options = listOf("A", "B", "C", "D")
-    var selectedOption by remember { mutableStateOf(options.first()) }
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        Dropdown(
+        RecordValueRow("Testing", options)
+    }
+}
+
+@Composable
+fun RecordValueRow(
+    valueName: String,
+    options: List<String>,
+    modifier: Modifier = Modifier
+) {
+    var selectedOption by remember { mutableStateOf(options.first()) }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        SelectValueText(valueName)
+        Spacer(Modifier.weight(1f))
+        SelectValueDropdown(
             options = options,
             selected = selectedOption,
             onSelect = { selectedOption = it },
@@ -43,9 +63,20 @@ fun RecordWinLayout(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun SelectValueText(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        modifier = modifier
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Dropdown(
+fun SelectValueDropdown(
     options: List<String>,
     selected: String,
     onSelect: (String) -> Unit,
