@@ -29,12 +29,11 @@ import androidx.compose.ui.unit.sp
 import com.example.mahjongtracker.R
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
-class TrackGameScreen {
-
-}
-
 @Composable
-fun TrackGameLayout(modifier: Modifier = Modifier) {
+fun TrackGameLayout(
+    onRecordClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }
     val playerScores = remember { mutableStateListOf<Int>(0, 0, 0, 0) }
 
@@ -55,7 +54,7 @@ fun TrackGameLayout(modifier: Modifier = Modifier) {
             playerScores = playerScores
         )
         Spacer(Modifier.size(100.dp))
-        RecordButton()
+        RecordButton(onClick = onRecordClick)
     }
 }
 
@@ -130,10 +129,11 @@ fun PlayerCard(
 
 @Composable
 fun RecordButton(
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = {},
+        onClick = onClick,
         content = { Text("Record Game", fontSize = 20.sp) },
     )
 }
@@ -163,6 +163,7 @@ fun HomeButton(
 fun TrackGameScreenPreview() {
     MahjongTrackerTheme {
         TrackGameLayout(
+            onRecordClick = {},
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
