@@ -140,6 +140,7 @@ fun SelectValueDropdown(
 fun RecordWinScreenPreview() {
     MahjongTrackerTheme {
         RecordWinLayout(
+            onConfirmClick = {},
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
