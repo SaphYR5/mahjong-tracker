@@ -1,0 +1,44 @@
+package com.example.mahjongtracker.ui.navigation
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.example.mahjongtracker.ui.track.RecordWinLayout
+import com.example.mahjongtracker.ui.track.TrackGameLayout
+
+enum class MahjongScreen() {
+    TrackGame,
+    RecordWin
+}
+
+@Composable
+fun MahjongNavHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = MahjongScreen.TrackGame.name,
+        modifier = modifier
+    ) {
+        composable(route = MahjongScreen.TrackGame.name) {
+            TrackGameLayout(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+            )
+        }
+        composable(route = MahjongScreen.RecordWin.name) {
+            RecordWinLayout(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+            )
+        }
+    }
+}

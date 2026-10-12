@@ -29,10 +29,6 @@ import androidx.compose.ui.unit.sp
 import com.example.mahjongtracker.R
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
-class TrackGameScreen {
-
-}
-
 @Composable
 fun TrackGameLayout(modifier: Modifier = Modifier) {
     val playerNames = remember { mutableStateListOf<String>("Player 1", "Player 2", "Player 3", "Player 4") }

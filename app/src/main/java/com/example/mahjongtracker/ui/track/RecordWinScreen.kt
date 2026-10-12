@@ -26,9 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
-class RecordWinScreen {
-}
-
 @Composable
 fun RecordWinLayout(modifier: Modifier = Modifier) {
     val options = listOf("A", "B", "C", "D")
