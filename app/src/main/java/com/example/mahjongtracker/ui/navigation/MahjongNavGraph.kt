@@ -36,6 +36,7 @@ fun MahjongNavHost(
         }
         composable(route = MahjongScreen.RecordWin.name) {
             RecordWinLayout(
+                onConfirmClick = { navController.navigate(MahjongScreen.TrackGame.name) },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(8.dp)

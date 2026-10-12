@@ -27,7 +27,10 @@ import androidx.compose.ui.unit.dp
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
 @Composable
-fun RecordWinLayout(modifier: Modifier = Modifier) {
+fun RecordWinLayout(
+    onConfirmClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val options = listOf("A", "B", "C", "D")
 
     Column(
@@ -40,16 +43,19 @@ fun RecordWinLayout(modifier: Modifier = Modifier) {
         RecordValueRow("Winner", options)
         RecordValueRow("Loser", options)
         RecordValueRow("Faan", options)
-        ConfirmButton(Modifier.fillMaxWidth())
+        ConfirmButton(
+            onClick = onConfirmClick,
+            modifier = Modifier.fillMaxWidth())
     }
 }
 
 @Composable
 fun ConfirmButton(
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = {},
+        onClick = onClick,
         modifier = modifier
     ) {
         Text("Confirm")
