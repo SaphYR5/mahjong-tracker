@@ -5,11 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.example.mahjongtracker.ui.navigation.MahjongNavHost
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
-import com.example.mahjongtracker.ui.track.RecordWinLayout
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +17,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MahjongTrackerTheme {
-                RecordWinLayout(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(8.dp)
+                val navController = rememberNavController()
+                MahjongNavHost(
+                    navController = navController,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }
