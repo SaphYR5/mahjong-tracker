@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
@@ -37,10 +38,24 @@ fun RecordWinLayout(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
+        Text("Record Win")
         RecordValueRow("Type", options)
         RecordValueRow("Winner", options)
         RecordValueRow("Loser", options)
         RecordValueRow("Faan", options)
+        ConfirmButton(Modifier.fillMaxWidth())
+    }
+}
+
+@Composable
+fun ConfirmButton(
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = {},
+        modifier = modifier
+    ) {
+        Text("Confirm")
     }
 }
 
