@@ -33,11 +33,14 @@ fun RecordWinLayout(modifier: Modifier = Modifier) {
     val options = listOf("A", "B", "C", "D")
 
     Column(
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        RecordValueRow("Testing", options)
+        RecordValueRow("Type", options)
+        RecordValueRow("Winner", options)
+        RecordValueRow("Loser", options)
+        RecordValueRow("Faan", options)
     }
 }
 
