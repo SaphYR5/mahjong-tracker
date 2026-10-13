@@ -8,8 +8,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.mahjongtracker.ui.track.RecordWinLayout
-import com.example.mahjongtracker.ui.track.TrackGameLayout
+import com.example.mahjongtracker.ui.ingame.RecordWinLayout
+import com.example.mahjongtracker.ui.ingame.TrackGameLayout
 
 enum class MahjongScreen() {
     TrackGame,
