@@ -1,4 +1,4 @@
-package com.example.mahjongtracker.ui.track
+package com.example.mahjongtracker.ui.ingame
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
