@@ -1,9 +1,14 @@
 package com.example.mahjongtracker.ui.ingame
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
@@ -11,9 +16,16 @@ import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 fun EditPlayerLayout(
     modifier: Modifier = Modifier
 ) {
-
+    Column(
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
+        Text("Edit Player Details")
+    }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun EditPlayerScreenPreview() {
     MahjongTrackerTheme {
