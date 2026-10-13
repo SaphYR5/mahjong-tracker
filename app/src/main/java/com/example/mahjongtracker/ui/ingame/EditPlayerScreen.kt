@@ -3,7 +3,9 @@ package com.example.mahjongtracker.ui.ingame
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -19,6 +21,7 @@ import com.example.mahjongtracker.ui.theme.MahjongTrackerTheme
 
 @Composable
 fun EditPlayerLayout(
+    onChangeClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var playerName by remember { mutableStateOf("Name") }
@@ -32,6 +35,10 @@ fun EditPlayerLayout(
         EditNameField(
             name = playerName,
             onNameChanged = { playerName = it }
+        )
+        ChangeButton(
+            onClick = onChangeClick,
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
@@ -49,11 +56,26 @@ fun EditNameField(
     )
 }
 
+@Composable
+fun ChangeButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier
+    ) {
+        Text("Confirm")
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun EditPlayerScreenPreview() {
     MahjongTrackerTheme {
         EditPlayerLayout(
+            onChangeClick = {},
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
