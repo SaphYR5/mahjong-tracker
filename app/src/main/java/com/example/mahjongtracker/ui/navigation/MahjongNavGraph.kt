@@ -8,12 +8,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.mahjongtracker.ui.ingame.EditPlayerLayout
 import com.example.mahjongtracker.ui.ingame.RecordWinLayout
 import com.example.mahjongtracker.ui.ingame.TrackGameLayout
 
 enum class MahjongScreen() {
     TrackGame,
-    RecordWin
+    RecordWin,
+    EditPlayer,
 }
 
 @Composable
@@ -29,6 +31,7 @@ fun MahjongNavHost(
         composable(route = MahjongScreen.TrackGame.name) {
             TrackGameLayout(
                 onRecordClick = { navController.navigate(MahjongScreen.RecordWin.name) },
+                onPlayerClick = { navController.navigate(MahjongScreen.EditPlayer.name) },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(8.dp)
@@ -37,6 +40,14 @@ fun MahjongNavHost(
         composable(route = MahjongScreen.RecordWin.name) {
             RecordWinLayout(
                 onConfirmClick = { navController.navigate(MahjongScreen.TrackGame.name) },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+            )
+        }
+        composable(route = MahjongScreen.EditPlayer.name) {
+            EditPlayerLayout(
+                onChangeClick = { navController.navigate(MahjongScreen.TrackGame.name) },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(8.dp)
