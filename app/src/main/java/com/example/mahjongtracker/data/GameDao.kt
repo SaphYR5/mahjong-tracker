@@ -1,6 +1,7 @@
 package com.example.mahjongtracker.data
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
@@ -19,4 +20,21 @@ interface GameDao {
 
     @Query("DELETE FROM games WHERE gameId = :gameId")
     abstract fun deleteGame(gameId: Int)
+
+    @Insert
+    abstract suspend fun insertGame(game: Game): Int
+
+    @Insert
+    abstract suspend fun insertPlayers(players: List<Player>): List<Int>
+
+    @Transaction
+    open suspend fun createGame(game: Game): Int {
+        val gameId = insertGame(game)
+        insertPlayers(
+            List(4) { seat ->
+                Player(gameId = gameId, seat = seat, name = "Player ${seat + 1}")
+            }
+        )
+        return gameId
+    }
 }
